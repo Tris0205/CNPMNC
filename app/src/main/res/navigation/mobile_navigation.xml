@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.noteapp.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_favorites"
+        android:name="com.example.noteapp.ui.favorites.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.noteapp.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_lock"
+        android:name="com.example.noteapp.ui.locked.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>
