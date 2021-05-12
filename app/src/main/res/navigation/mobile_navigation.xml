@@ -8,18 +8,24 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.noteapp.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_favorites"
-        android:name="com.example.noteapp.ui.favorites.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="com.example.noteapp.ui.favorites.FavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/nav_lock"
-        android:name="com.example.noteapp.ui.locked.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.example.noteapp.ui.locked.LockFragment"
+        android:label="Lock"
+        tools:layout="@layout/fragment_lock" />
+
+    <fragment
+        android:id="@+id/nav_trash"
+        android:name="com.example.noteapp.ui.trash.TrashFragment"
+        android:label="Trash"
+        tools:layout="@layout/fragment_trash" />
 </navigation>

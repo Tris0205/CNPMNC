@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.noteapp.R;
 
-public class SlideshowFragment extends Fragment {
+public class LockFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private LockViewModel lockViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        lockViewModel =
+                new ViewModelProvider(this).get(LockViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_lock, container, false);
+        final TextView textView = root.findViewById(R.id.text_lock);
+        lockViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
