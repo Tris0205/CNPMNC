@@ -11,6 +11,7 @@ import com.developerdepository.noted.entities.Note;
 import java.util.List;
 
 @Dao
+//DAO là một lớp để định nghĩa các tương tác trong database
 public interface NoteDao {
 
     @Query("SELECT * FROM notes ORDER BY id DESC")

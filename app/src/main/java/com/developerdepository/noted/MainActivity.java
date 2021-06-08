@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
     public static final int REQUEST_CODE_SHOW_NOTES = 3;
     public static final int REQUEST_CODE_TAKE_PHOTO = 4;
     public static final int REQUEST_CODE_SELECT_IMAGE = 5;
-    public static final int REQUEST_CODE_VOICE_NOTE = 6;
+
 
     private int noteClickedPosition = -1;
     private androidx.appcompat.view.ActionMode actionMode;
@@ -188,10 +188,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
                     UIUtil.hideKeyboard(MainActivity.this);
                     showAddImageDialog();
                     break;
-                case R.id.menu_voice:
-                    UIUtil.hideKeyboard(MainActivity.this);
-                    voiceNote();
-                    break;
+
                 case R.id.menu_web_link:
                     showAddURLDialog();
                     break;
@@ -234,9 +231,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
             case R.id.menu_add_image:
                 showAddImageDialog();
                 break;
-            case R.id.menu_add_voice:
-                voiceNote();
-                break;
+
             case R.id.menu_add_url:
                 showAddURLDialog();
                 break;
@@ -376,13 +371,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
         return filePath;
     }
 
-    private void voiceNote() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak something to add note!");
-        startActivityForResult(intent, REQUEST_CODE_VOICE_NOTE);
-    }
+
 
     private void showAddURLDialog() {
         if (dialogAddURL == null) {
@@ -726,18 +715,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
                     }
                 }
             }
-        } else if (requestCode == REQUEST_CODE_VOICE_NOTE && resultCode == RESULT_OK) {
-            if (data != null) {
-                ArrayList<String> voiceResult = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                Intent intent = new Intent(getApplicationContext(), CreateNoteActivity.class);
-                intent.putExtra("isFromQuickActions", true);
-                intent.putExtra("quickActionType", "voiceNote");
-                intent.putExtra("inputText", voiceResult.get(0));
-                startActivityForResult(intent, REQUEST_CODE_ADD_NOTE);
-                CustomIntent.customType(MainActivity.this, "left-to-right");
-                inputSearch.setText(null);
-            }
-        } else if (requestCode == RC_APP_UPDATE) {
+        }  else if (requestCode == RC_APP_UPDATE) {
             if (resultCode != RESULT_OK) {
                 Toast.makeText(MainActivity.this, "App Update Failed!", Toast.LENGTH_SHORT).show();
             }

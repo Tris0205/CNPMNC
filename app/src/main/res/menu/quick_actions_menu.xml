@@ -17,13 +17,6 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/menu_voice"
-        android:icon="@drawable/ic_voice"
-        android:iconTint="@color/colorIcons"
-        android:title="Voice Note"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/menu_web_link"
         android:icon="@drawable/ic_web_link"
         android:iconTint="@color/colorIcons"

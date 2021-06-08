@@ -17,12 +17,6 @@
             android:iconTint="@color/colorPrimaryDark"
             android:orderInCategory="200"/>
 
-        <item
-            android:id="@+id/menu_add_voice"
-            android:title="Add Voice Note"
-            android:icon="@drawable/ic_voice"
-            android:iconTint="@color/colorPrimaryDark"
-            android:orderInCategory="300"/>
 
         <item
             android:id="@+id/menu_add_url"

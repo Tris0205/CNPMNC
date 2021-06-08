@@ -286,12 +286,6 @@ public class CreateNoteActivity extends AppCompatActivity {
             selectImage();
         });
 
-        layoutAddActions.findViewById(R.id.layout_voice_note).setOnClickListener(v -> {
-            UIUtil.hideKeyboard(CreateNoteActivity.this);
-            bottomSheetAddActions.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            voiceNote();
-        });
-
         layoutAddActions.findViewById(R.id.layout_add_url).setOnClickListener(v -> {
             bottomSheetAddActions.setState(BottomSheetBehavior.STATE_COLLAPSED);
             showAddURLDialog();
@@ -331,13 +325,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         return filePath;
     }
 
-    private void voiceNote() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak something to add note!");
-        startActivityForResult(intent, REQUEST_CODE_VOICE_NOTE);
-    }
+
 
     private void showAddURLDialog() {
         if (dialogAddURL == null) {
@@ -553,25 +541,11 @@ public class CreateNoteActivity extends AppCompatActivity {
                         .setProgressColorInt(getResources().getColor(android.R.color.white))
                         .show();
                 return;
-            } else {
-                textToSpeech = new TextToSpeech(CreateNoteActivity.this, status -> {
-                    if (status == TextToSpeech.SUCCESS) {
-                        int result = textToSpeech.setLanguage(Locale.ENGLISH);
-
-                        if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                            bottomSheetMiscellaneous.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                            Toast.makeText(CreateNoteActivity.this, "Sorry, language not supported!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            UIUtil.hideKeyboard(CreateNoteActivity.this);
-                            bottomSheetMiscellaneous.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                            showDialogReadingNote();
-                        }
-                    } else {
+            }  else {
                         bottomSheetMiscellaneous.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         Toast.makeText(CreateNoteActivity.this, "Initialization Failed!", Toast.LENGTH_SHORT).show();
                     }
-                });
-            }
+
         });
 
         layoutMiscellaneous.findViewById(R.id.layout_share_note).setOnClickListener(v -> {
@@ -631,44 +605,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         }
     }
 
-    private void showDialogReadingNote() {
-        if (dialogReadingNote == null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteActivity.this);
-            View view = LayoutInflater.from(this).inflate(
-                    R.layout.layout_reading_note,
-                    (ViewGroup) findViewById(R.id.layout_reading_note_container)
-            );
-            builder.setView(view);
 
-            dialogReadingNote = builder.create();
-            if (dialogReadingNote.getWindow() != null) {
-                dialogReadingNote.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-            }
-
-            textReadingNote = view.findViewById(R.id.text_reading_text);
-
-            String textToRead1 = inputNoteTitle.getText().toString().trim();
-            String textToRead2 = inputNoteSubtitle.getText().toString().trim();
-            String textToRead3 = inputNote.getText().toString().trim();
-
-            view.findViewById(R.id.start_reading).setOnClickListener(v -> {
-                textReadingNote.setText("Reading Note...");
-                textToSpeech.speak(textToRead1, TextToSpeech.QUEUE_ADD, null);
-                textToSpeech.speak(textToRead2, TextToSpeech.QUEUE_ADD, null);
-                textToSpeech.speak(textToRead3, TextToSpeech.QUEUE_ADD, null);
-            });
-
-            view.findViewById(R.id.stop_reading).setOnClickListener(v -> {
-                textReadingNote.setText("Do you want NOTED to read the note for you?");
-                if (textToSpeech != null) {
-                    textToSpeech.stop();
-                }
-                dialogReadingNote.dismiss();
-            });
-        }
-        dialogReadingNote.setCancelable(false);
-        dialogReadingNote.show();
-    }
 
     private void showDeleteNoteDialog() {
         MaterialDialog materialDialog = new MaterialDialog.Builder(CreateNoteActivity.this)
@@ -766,11 +703,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                     }
                 }
             }
-        } else if (requestCode == REQUEST_CODE_VOICE_NOTE && resultCode == RESULT_OK) {
-            if (data != null) {
-                ArrayList<String> voiceResult = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                inputNote.setText(voiceResult.get(0));
-            }
+
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Alerter.create(CreateNoteActivity.this)
                     .setText("Some ERROR occurred!")
@@ -789,35 +722,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (textToSpeech != null) {
-            textToSpeech.stop();
-            dialogReadingNote.dismiss();
-            textReadingNote.setText("Do you want NOTED to read the note for you?");
-        }
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (textToSpeech != null) {
-            textToSpeech.stop();
-            textToSpeech.shutdown();
-            dialogReadingNote.dismiss();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (textToSpeech != null) {
-            textToSpeech.stop();
-            textToSpeech.shutdown();
-            dialogReadingNote.dismiss();
-        }
-    }
 
     @Override
     public void onBackPressed() {

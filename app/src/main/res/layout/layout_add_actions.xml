@@ -41,10 +41,10 @@
             android:layout_marginStart="12dp"
             android:src="@drawable/ic_camera"
             android:scaleType="centerCrop"
-            android:tint="@color/colorIcons"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/colorIcons" />
 
         <TextView
             android:id="@+id/text_take_photo"
@@ -87,10 +87,10 @@
             android:layout_marginStart="12dp"
             android:src="@drawable/ic_image"
             android:scaleType="centerCrop"
-            android:tint="@color/colorIcons"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/colorIcons" />
 
         <TextView
             android:id="@+id/text_add_image"
@@ -124,38 +124,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:id="@+id/image_voice"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_voice"
-            android:scaleType="centerCrop"
-            android:tint="@color/colorIcons"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <TextView
-            android:id="@+id/text_voice_note"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/poppins"
-            android:includeFontPadding="false"
-            android:text="@string/add_voice_note"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/colorText"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="@+id/image_voice"
-            app:layout_constraintStart_toEndOf="@+id/image_voice"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image_voice" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -168,23 +137,25 @@
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_voice_note"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_voice_note"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageView
             android:id="@+id/image_url"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_web_link"
             android:scaleType="centerCrop"
-            android:tint="@color/colorIcons"
+            android:src="@drawable/ic_web_link"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:tint="@color/colorIcons" />
 
         <TextView
             android:id="@+id/text_add_url"
@@ -201,8 +172,8 @@
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/image_url"
-            app:layout_constraintStart_toEndOf="@+id/image_url"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_url"
             app:layout_constraintTop_toTopOf="@+id/image_url" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
